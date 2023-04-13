@@ -1,0 +1,807 @@
+#include<iostream>
+#include<string>
+#include<conio.h>
+#include<iomanip>
+#include<fstream>
+#include<vector>
+
+using namespace std;
+class DanhSach_HocSinh;
+class TuChon_TN;
+class TuChon_XH;
+class TuChon_CNNT;
+
+class HocSinh
+{
+private:
+	string hoTen;
+	string gioiTinh;
+	string ngaySinh;
+	float toan;
+	float van;
+	float anhVan;
+public:
+
+	HocSinh(string _hoTen, string _gioiTinh, string _ngaySinh, float _toan, float _van, float _anhVan) : hoTen(_hoTen), gioiTinh(_gioiTinh), ngaySinh(_ngaySinh),
+		toan(_toan), van(_van), anhVan(_anhVan) {}
+
+	~HocSinh();
+	string get_hoTen()
+	{
+		return hoTen;
+	}
+	string get_gioiTinh()
+	{
+		return gioiTinh;
+	}
+	string get_ngaySinh()
+	{
+		return ngaySinh;
+	}
+	float get_toan()
+	{
+		return toan;
+	}
+	float get_van()
+	{
+		return van;
+	}
+	float get_anhVan()
+	{
+		return anhVan;
+	}
+	//--------
+	void xuatBB();
+	void xuatBB_File(ofstream& output);
+	virtual float tinhTB()
+	{
+		return 0;
+	}
+	virtual void nhap_File(ifstream& input) = 0;
+	virtual void xuat_File(ofstream& output) = 0;
+	virtual void nhap();
+	virtual void xuat();
+};
+
+
+HocSinh::~HocSinh() {}
+
+void HocSinh::nhap() {}
+void HocSinh::xuat() {}
+void HocSinh::nhap_File(ifstream& input) {}
+void HocSinh::xuat_File(ofstream& output) {}
+void HocSinh::xuatBB()
+{
+	cout << "Ho Ten: " << hoTen << endl;
+	cout << "Gioi Tinh: " << gioiTinh << endl;
+	cout << "Ngay sinh:" << ngaySinh << endl;
+	cout << "Diem toan: " << toan << endl;
+	cout << "Diem van: " << van << endl;
+	cout << "Diem anh van: " << anhVan << endl;
+	xuat();// goi hàm xu?t c?a l?p con
+
+	cout << "TB: " << tinhTB() << endl;
+	if (tinhTB() < 5) {
+		cout << "Hoc luc yeu!" << endl;
+	}
+	else if (tinhTB() >= 5 && tinhTB() < 8) {
+		cout << "Hoc luc kha!" << endl;
+	}
+	else if (tinhTB() >= 8) {
+		cout << "Hoc luc tot!" << endl;
+	}
+}
+void HocSinh::xuatBB_File(ofstream& output)
+{
+	output << "Ho Ten: " << hoTen << endl;
+	output << "Gioi Tinh: " << gioiTinh << endl;
+	output << "Ngay sinh:" << ngaySinh << endl;
+	output << "Diem toan: " << toan << endl;
+	output << "Diem van: " << van << endl;
+	output << "Diem anh van: " << anhVan << endl;
+	xuat_File(output);// goi hàm xu?t c?a l?p con
+	output << "TB: " << tinhTB() << endl;
+	if (tinhTB() < 5) {
+		output << "Hoc luc yeu!" << endl;
+	}
+	else if (tinhTB() >= 5 && tinhTB() < 8) {
+		output << "Hoc luc kha!" << endl;
+	}
+	else if (tinhTB() >= 8) {
+		output << "Hoc luc tot!" << endl;
+	}
+}
+
+
+class TuChon_TN :public HocSinh
+{
+private:
+	float ly;
+	float hoa;
+	float sinh;
+public:
+	TuChon_TN(string _hoTen, string _gioiTinh, string _ngaySinh,
+		float _toan, float _van, float _anhVan) :HocSinh(_hoTen, _gioiTinh, _ngaySinh
+			, _toan, _van, _anhVan) {}
+	~TuChon_TN();
+	float tinhTB() override;
+	void nhap()override;
+	void xuat()override;
+	void nhap_File(ifstream& input)override;
+	void xuat_File(ofstream& output)override;
+};
+
+TuChon_TN::~TuChon_TN() {}
+void TuChon_TN::nhap()
+{
+	do {
+		cout << "Diem ly: ";
+		cin >> ly;
+		if (ly < 0 || ly > 10)
+		{
+			cout << "== Diem tu 0 -> 10 Hay nhap lai! ==" << endl;
+		}
+	} while (ly < 0 || ly > 10);
+	do {
+		cout << "Diem hoa: ";
+		cin >> hoa;
+		if (hoa < 0 || hoa > 10)
+		{
+			cout << "== Diem tu 0 -> 10 Hay nhap lai! ==" << endl;
+		}
+	} while (hoa < 0 || hoa > 10);
+	do {
+		cout << "Diem sinh: ";
+		cin >> sinh;
+		if (sinh < 0 || sinh > 10)
+		{
+			cout << "== Diem tu 0 -> 10 Hay nhap lai! ==" << endl;
+		}
+	} while (sinh < 0 || sinh > 10);
+
+}
+
+void TuChon_TN::xuat()
+{
+	cout << "Tu chon khoa hoc Tu Nhien" << endl;
+	cout << "Diem ly: " << ly << endl;
+	cout << "Diem hoa: " << hoa << endl;
+	cout << "Diem sinh: " << sinh << endl;
+}
+float TuChon_TN::tinhTB()
+{
+	return (get_toan() + get_van() + get_anhVan() + ly + hoa + sinh) / 6;
+}
+void TuChon_TN::nhap_File(ifstream& input)
+{
+	input >> ly;
+	input >> hoa;
+	input >> sinh;
+}
+void TuChon_TN::xuat_File(ofstream& output)
+{
+	output << "Tu chon khoa hoc Tu Nhien" << endl;
+	output << "Diem ly: " << ly << endl;
+	output << "Diem hoa: " << hoa << endl;
+	output << "Diem sinh: " << sinh << endl;
+}
+
+
+class TuChon_XH :public HocSinh
+{
+private:
+	float su;
+	float dia;
+	float gdkt;
+public:
+	TuChon_XH(string _hoTen, string _gioiTinh, string _ngaySinh,
+		float _toan, float _van, float _anhVan) :HocSinh(_hoTen, _gioiTinh, _ngaySinh
+			, _toan, _van, _anhVan) {}
+	~TuChon_XH();
+	float tinhTB() override;
+	void nhap()override;
+	void xuat()override;
+	void nhap_File(ifstream& input)override;
+	void xuat_File(ofstream& output)override;
+};
+
+void TuChon_XH::nhap()
+{
+	do {
+		cout << "Diem Su: ";
+		cin >> su;
+		if (su < 0 || su > 10)
+		{
+			cout << "== Diem tu 0 -> 10 Hay nhap lai! ==" << endl;
+		}
+	} while (su < 0 || su > 10);
+
+	do {
+		cout << "Diem Dia: ";
+		cin >> dia;
+		if (dia < 0 || dia > 10)
+		{
+			cout << "== Diem tu 0 -> 10 Hay nhap lai! ==" << endl;
+		}
+	} while (dia < 0 || dia > 10);
+	do {
+		cout << "Diem giao duc kinh te: ";
+		cin >> gdkt;
+		if (gdkt < 0 || gdkt > 10)
+		{
+			cout << "== Diem tu 0 -> 10 Hay nhap lai! ==" << endl;
+		}
+	} while (gdkt < 0 || gdkt > 10);
+}
+void TuChon_XH::xuat()
+{
+	cout << "Tu chon Khoa Hoc Xa Hoi" << endl;
+	cout << "Diem su: " << su << endl;
+	cout << "Diem dia ly: " << dia << endl;
+	cout << "Diem giao duc kinh te: " << gdkt << endl;
+}
+float TuChon_XH::tinhTB()
+{
+	return (get_toan() + get_van() + get_anhVan() + su + dia + gdkt) / 6;
+}
+void TuChon_XH::nhap_File(ifstream& input)
+{
+	input >> su;
+	input >> dia;
+	input >> gdkt;
+}
+void TuChon_XH::xuat_File(ofstream& output)
+{
+	output << "Tu chon Khoa Hoc Xa Hoi" << endl;
+	output << "Diem su: " << su << endl;
+	output << "Diem dia ly: " << dia << endl;
+	output << "Diem giao duc kinh te: " << gdkt << endl;
+}
+
+
+class TuChon_CNNT :public HocSinh
+{
+private:
+	float congNghe;
+	float tinHoc;
+	float ngheThuat;
+public:
+
+	TuChon_CNNT(string _hoTen, string _gioiTinh, string _ngaySinh,
+		float _toan, float _van, float _anhVan) :HocSinh(_hoTen, _gioiTinh, _ngaySinh
+			, _toan, _van, _anhVan) {}
+	~TuChon_CNNT();
+	float tinhTB() override;
+	void nhap()override;
+	void xuat()override;
+	void nhap_File(ifstream& input)override;
+	void xuat_File(ofstream& output)override;
+};
+
+TuChon_CNNT::~TuChon_CNNT() {}
+
+void TuChon_CNNT::nhap()
+{
+	do {
+		cout << "Diem cong nghe: ";
+		cin >> congNghe;
+		if (congNghe < 0 || congNghe > 10)
+		{
+			cout << "== Diem tu 0 -> 10 Hay nhap lai! ==" << endl;
+		}
+	} while (congNghe < 0 || congNghe > 10);
+
+	do {
+		cout << "Diem tin hoc: ";
+		cin >> tinHoc;
+		if (tinHoc < 0 || tinHoc > 10)
+		{
+			cout << "== Diem tu 0 -> 10 Hay nhap lai! ==" << endl;
+		}
+	} while (tinHoc < 0 || tinHoc > 10);
+
+	do {
+		cout << "Diem Nghe thuat: ";
+		cin >> ngheThuat;
+		if (ngheThuat < 0 || ngheThuat > 10)
+		{
+			cout << "== Diem tu 0 -> 10 Hay nhap lai! ==" << endl;
+		}
+	} while (ngheThuat < 0 || ngheThuat > 10);
+
+}
+void TuChon_CNNT::xuat()
+{
+	cout << "Tu chon khoa hoc cong nghe - nghe thuat " << endl;
+	cout << "Diem cong nghe: " << congNghe << endl;
+	cout << "Diem tin hoc: " << tinHoc << endl;
+	cout << "Diem nghe thuat: " << ngheThuat << endl;
+}
+float TuChon_CNNT::tinhTB()
+{
+	return (get_toan() + get_van() + get_anhVan() + congNghe + tinHoc + ngheThuat) / 6;
+}
+void TuChon_CNNT::nhap_File(ifstream& input)
+{
+	input >> congNghe;
+	input >> tinHoc;
+	input >> ngheThuat;
+}
+void TuChon_CNNT::xuat_File(ofstream& output)
+{
+	output << "Tu chon khoa hoc cong nghe - nghe thuat " << endl;
+	output << "Diem cong nghe: " << congNghe << endl;
+	output << "Diem tin hoc: " << tinHoc << endl;
+	output << "Diem nghe thuat: " << ngheThuat << endl;
+}
+
+class DanhSach_HocSinh
+{
+private:
+	vector<HocSinh*> dsHocSinh;
+public:
+	void themHocSinh();
+	void hienThiDanhSach();
+	void timHocSinh();
+	void suaHocSinh();
+	void xoaHocSinh();
+	void sapXepHocSinh_TB();
+	void doc_File();
+	void xuat_File();
+	DanhSach_HocSinh();
+	~DanhSach_HocSinh();
+};
+
+DanhSach_HocSinh::DanhSach_HocSinh() {}
+
+DanhSach_HocSinh::~DanhSach_HocSinh()
+{
+	for (int i = 0; i < dsHocSinh.size(); i++)
+	{
+		delete dsHocSinh[i];
+	}
+}
+
+class HocSinh_Tc
+{
+public:
+	static HocSinh* newHocSinh(string hoTen,
+		string gioiTinh,string ngaySinh, float toan, float van, float anhVan, int luaChon)
+	{
+		if (luaChon == 1)
+			return new TuChon_TN(hoTen, gioiTinh,ngaySinh, toan, van, anhVan);
+		else if (luaChon == 2)
+			return new TuChon_XH(hoTen, gioiTinh, ngaySinh, toan, van, anhVan);
+		else if (luaChon == 3)
+			return new TuChon_CNNT(hoTen, gioiTinh, ngaySinh, toan, van, anhVan);
+	}
+};
+
+
+
+void DanhSach_HocSinh::themHocSinh()
+{
+	cout << "   == Nhap thong tin hoc sinh ==   " << endl;
+	string hoTen;
+	string gioiTinh;
+	string ngaySinh;
+	float toan;
+	float van;
+	float anhVan;
+	cin.ignore();
+	cout << "Nhap ten hoc sinh: ";
+	getline(cin, hoTen);
+	fflush(stdin);
+	cout << "Nhap gioi tinh: ";
+	getline(cin, gioiTinh);
+	fflush(stdin);
+	cout << "Nhap ngay sinh: ";
+	getline(cin, ngaySinh);
+	fflush(stdin);
+	do {
+		cout << "Diem toan: ";
+		cin >> toan;
+		if (toan < 0 || toan > 10)
+		{
+			cout << "== Diem tu 0 -> 10 Hay nhap lai! ==" << endl;
+		}
+	} while (toan < 0 || toan > 10);
+	do {
+		cout << "Diem van: ";
+		cin >> van;
+		if (van < 0 || van > 10)
+		{
+			cout << "== Diem tu 0 -> 10 Hay nhap lai! ==" << endl;
+		}
+	} while (van < 0 || van > 10);
+	do {
+		cout << "Diem anh van: ";
+		cin >> anhVan;
+		if (anhVan < 0 || anhVan > 10)
+		{
+			cout << "== Diem tu 0 -> 10 Hay nhap lai! ==" << endl;
+		}
+	} while (anhVan < 0 || anhVan > 10);
+
+	cout << "  =======   nhom mon tu chon  =======" << endl;
+	cout << "=====  1: Nhom mon khoa hoc Tu Nhien 2 : Nhom mon khoa hoc Xa Hoi 3 : Nhom mon Cong Nghe - Nghe Thuat  ====" << endl;
+	int luaChon;
+	do
+	{
+		cout << "Lua chon: ";
+		cin >> luaChon;
+		if (luaChon != 1 && luaChon != 2 && luaChon != 3)
+		{
+			cout << "== Lua chon khong hop le! Vui long thu lai. ==" << endl;
+		}
+	} while (luaChon != 1 && luaChon != 2 && luaChon != 3);
+	HocSinh* hs = HocSinh_Tc::newHocSinh(hoTen, gioiTinh, ngaySinh, toan, van, anhVan, luaChon);
+	hs->nhap(); // g?i ph??ng th?c nh?p c?a l?p con                                  
+	dsHocSinh.push_back(hs);
+}
+
+void DanhSach_HocSinh::hienThiDanhSach()
+{
+	//tinh so hoc sinh
+	int n = dsHocSinh.size();
+	cout << "\nSo Hoc sinh: " << n << endl;
+	// tinh so luong hs gioi, kha, yeu
+	int yeu = 0, kha = 0, gioi = 0;
+	for (int i = 0; i < dsHocSinh.size(); i++)
+	{
+		if (dsHocSinh[i]->tinhTB() < 5) {
+			yeu++;
+		}
+		else if (dsHocSinh[i]->tinhTB() >= 5 && dsHocSinh[i]->tinhTB() < 8) {
+			kha++;
+		}
+		else if (dsHocSinh[i]->tinhTB() >= 8) {
+			gioi++;
+		}
+	}
+	cout << "\nso hoc sinh gioi: " << gioi << " (" << fixed << setprecision(2) << (float)gioi / n*100 << "%)" << endl;
+	cout << "so hoc sinh kha: " << kha << " (" << fixed << setprecision(2) << (float)kha / n*100 << "%)" << endl;
+	cout << "so hoc sinh yeu: " << yeu << " (" << fixed << setprecision(2) << (float)yeu / n * 100 << "%)" << endl;
+	// xuat thong tin hoc sinh
+	for (int i = 0; i < dsHocSinh.size(); i++)
+	{
+		cout << "\nHoc sinh thu: " << i + 1 << "\n";
+		dsHocSinh[i]->xuatBB();
+	}
+}
+
+void DanhSach_HocSinh::timHocSinh()
+{
+	int kt_Stt;
+	cout << "Nhap stt: " ;
+	cin >> kt_Stt;
+	for (int i = 0; i < dsHocSinh.size(); i++)
+	{
+		if ((i+1) == kt_Stt)
+		{
+			cout << "== Duoc tim thay! ==\n" << endl;
+			dsHocSinh[i]->xuatBB();
+			return;
+		}
+	}
+	cout << "Khong tim thay! " << endl;
+}
+
+void DanhSach_HocSinh::xoaHocSinh()
+{
+	int kt_Stt;
+	cout << "Nhap stt: ";
+	cin >> kt_Stt;
+	// xuat thong tin truoc khi xoa
+	bool timThay = false;
+	for (int i = 0; i < dsHocSinh.size(); i++)
+	{
+		if ((i + 1) == kt_Stt)
+		{
+			cout << "== Duoc tim thay! ==\n" << endl;
+			dsHocSinh[i]->xuatBB();
+			timThay = true;
+			break;
+		}
+	}
+	if (!timThay) {
+		cout << "== Khong tim thay hoc sinh co STT tren! ==" << endl;
+		return ;
+	}
+
+	// xoa hoc sinh
+	char luaChon;
+	cout << "Ban muon xoa hoc sinh nay? (y/n): ";
+	cin >> luaChon;
+	do {
+		if (luaChon == 'n' || luaChon == 'N') {
+			cout << "Thoat xoa..." << endl;
+			return ;
+		}
+		// do something here
+		for (int i = 0; i < dsHocSinh.size(); i++)
+		{
+			if ((i + 1) == kt_Stt)
+			{
+				dsHocSinh.erase(dsHocSinh.begin() + i);
+				cout << "Xoa hoc sinh thanh cong!" << endl;
+				return ;
+			}
+		}
+
+	} while (luaChon == 'y' || luaChon == 'Y');
+	return;
+}
+
+
+void DanhSach_HocSinh::sapXepHocSinh_TB()
+{
+	int n = dsHocSinh.size();
+	{
+		if (n == 0 || n == 1)
+		{
+			cout << "== Khong sap xep! (sl hoc sinh <= 1) == " << endl;
+			return;
+		}
+	}
+	for (int i = 0; i < n - 1; i++) {
+		int min_idx = i;
+		for (int j = i + 1; j < n; j++) 
+		{
+			if (dsHocSinh[j]->tinhTB() < dsHocSinh[min_idx]->tinhTB()) 
+			{
+				min_idx = j;
+			}
+		}
+		if (min_idx != i) 
+		{
+			swap(dsHocSinh[i], dsHocSinh[min_idx]);
+		}
+	}
+	cout << "Da sap xep danh sach hoc sinh theo Diem TB!" << endl;
+}
+
+
+void DanhSach_HocSinh::suaHocSinh()
+{
+	int kt_Stt;
+	cout << "Nhap stt: ";
+	cin >> kt_Stt;
+	// xuat thong tin truoc khi sua
+	bool timThay = false;
+	for (int i = 0; i < dsHocSinh.size(); i++)
+	{
+		if ((i + 1) == kt_Stt)
+		{
+			cout << "== Duoc tim thay! ==\n" << endl;
+			dsHocSinh[i]->xuatBB();
+			timThay = true;
+			break;
+		}
+	}
+	if (!timThay) {
+		cout << "Khong tim thay hoc sinh co STT tren!" << endl;
+		return;
+	}
+
+	char luaChon;
+	cout << "Ban muon sua thong tin hoc sinh nay? (y/n): ";
+	cin >> luaChon;
+	do {
+		if (luaChon == 'n' || luaChon == 'N') {
+			cout << "Thoat sua..." << endl;
+			return;
+		}
+		// do something here
+		for (int i = 0; i < dsHocSinh.size(); i++)
+		{
+			if ((i + 1) == kt_Stt)
+			{
+				cout << "\nNhap thong tin moi cho hoc sinh :" << i + 1 << endl;
+				string hoTen;
+				string gioiTinh;
+				string ngaySinh;
+				float toan;
+				float van;
+				float anhVan;
+				cin.ignore();
+				cout << "Nhap ten hoc sinh: ";
+				getline(cin, hoTen);
+				fflush(stdin);
+				cout << "Nhap gioi tinh: ";
+				getline(cin, gioiTinh);
+				fflush(stdin);
+				cout << "Nhap ngay sinh: ";
+				getline(cin, ngaySinh);
+				fflush(stdin);
+				do {
+					cout << "Diem toan: ";
+					cin >> toan;
+					if (toan < 0 || toan > 10)
+					{
+						cout << "== Diem tu 0 -> 10 Hay nhap lai! ==" << endl;
+					}
+				} while (toan < 0 || toan > 10);
+				do {
+					cout << "Diem van: ";
+					cin >> van;
+					if (van < 0 || van > 10)
+					{
+						cout << "== Diem tu 0 -> 10 Hay nhap lai! ==" << endl;
+					}
+				} while (van < 0 || van > 10);
+				do {
+					cout << "Diem anh van: ";
+					cin >> anhVan;
+					if (anhVan < 0 || anhVan > 10)
+					{
+						cout << "== Diem tu 0 -> 10 Hay nhap lai! ==" << endl;
+					}
+				} while (anhVan < 0 || anhVan > 10);
+
+				cout << "  =======   nhom mon tu chon  =======" << endl;
+				cout << "=====  1: Nhom mon khoa hoc Tu Nhien 2 : Nhom mon khoa hoc Xa Hoi 3 : Nhom mon Cong Nghe - Nghe Thuat  ====" << endl;
+				int luaChon;
+				do
+				{
+					cout << "Lua chon: ";
+					cin >> luaChon;
+					if (luaChon != 1 && luaChon != 2 && luaChon != 3)
+					{
+						cout << "== Lua chon khong hop le! Vui long thu lai. ==" << endl;
+					}
+				} while (luaChon != 1 && luaChon != 2 && luaChon != 3);
+				HocSinh* hs = HocSinh_Tc::newHocSinh(hoTen, gioiTinh, ngaySinh, toan, van, anhVan, luaChon);
+				hs->nhap(); // g?i ph??ng th?c nh?p c?a l?p con                                  
+				dsHocSinh[i] = hs;
+				cout << "Sua thong tin hoc sinh thanh cong!" << endl;
+				return;
+			}
+		}
+
+	} while (luaChon == 'y' || luaChon == 'Y');
+	return;
+}
+
+void DanhSach_HocSinh::doc_File()
+{
+	ifstream input("data.txt");
+	if (!input.is_open())
+	{
+		cout << "khong doc duoc file";
+		return;
+	}
+	while (!input.eof())
+	{
+		string hoTen;
+		string gioiTinh;
+		string ngaySinh;
+		float toan;
+		float van;
+		float anhVan;
+		input.ignore();
+
+		getline(input, hoTen);
+		fflush(stdin);
+
+		getline(input, gioiTinh);
+		fflush(stdin);
+
+		getline(input, ngaySinh);
+		fflush(stdin);
+		input >> toan;
+		input >> van;
+		input >> anhVan;
+		int luaChon;
+		input >> luaChon;
+
+		HocSinh* hs = HocSinh_Tc::newHocSinh(hoTen, gioiTinh, ngaySinh, toan, van, anhVan, luaChon);
+		hs->nhap_File(input); // Truy?n ??i t??ng ifstream input vào cho ph??ng th?c nhap_File()
+		dsHocSinh.push_back(hs);
+
+	}
+	input.close();
+	cout << "Them hoc sinh thanh cong!" << endl;
+}
+void DanhSach_HocSinh::xuat_File()
+{
+	ofstream output("output_hocsinh.txt");
+	if (output.is_open())
+	{
+		int n = dsHocSinh.size();
+		output << "\nSo Hoc sinh: " << n << endl;
+		// tinh so luong hs gioi, kha, yeu
+		int yeu = 0, kha = 0, gioi = 0;
+		for (int i = 0; i < dsHocSinh.size(); i++)
+		{
+			if (dsHocSinh[i]->tinhTB() < 5) {
+				yeu++;
+			}
+			else if (dsHocSinh[i]->tinhTB() >= 5 && dsHocSinh[i]->tinhTB() < 8) {
+				kha++;
+			}
+			else if (dsHocSinh[i]->tinhTB() >= 8) {
+				gioi++;
+			}
+		}
+		output << "\nso hoc sinh gioi: " << gioi << " (" << fixed << setprecision(2) << (float)gioi / n * 100 << "%)" << endl;
+		output << "so hoc sinh kha: " << kha << " (" << fixed << setprecision(2) << (float)kha / n * 100 << "%)" << endl;
+		output << "so hoc sinh yeu: " << yeu << " (" << fixed << setprecision(2) << (float)yeu / n * 100 << "%)" << endl;
+		// xuat thong tin hoc sinh
+		for (int i = 0; i < dsHocSinh.size(); i++)
+		{
+			output << "\nHoc sinh thu: " << i + 1 << "\n";
+			dsHocSinh[i]->xuatBB_File(output);
+		}
+		output.close();
+		cout << "== xuat file thanh cong ==" << endl;
+	}
+	else
+	{
+		cout << "khong tao duoc file!" << endl;
+	}
+}
+
+int main()
+{
+	DanhSach_HocSinh ds;
+	int choice;
+	do {
+		system("cls");// xoa man hinh
+		cout << "==== CHUONG TRINH QUAN LY HOC SINH ====" << endl;
+		cout << "Option 1: Nhap them hoc sinh: " << endl;
+		cout << "Option 2: Xuat danh sach hoc sinh: " << endl;
+		cout << "Option 3: Tim kiem theo So thu tu: " << endl;
+		cout << "Option 4: Sua thong tin hoc sinh: " << endl;
+		cout << "Option 5: Xoa hoc sinh theo So thu tu: " << endl;
+		cout << "Option 6: Sap xep hoc sinh theo Diem Trung Binh:" << endl;
+		cout << "Option 7: Them hoc sinh tu File: " << endl;
+		cout << "Option 8: Xuat hoc sinh ra File: " << endl;
+		cout << "Option 9: Thoat chuong trinh: " << endl;
+		cout << "Lua chon: ";
+		cin >> choice;
+		switch (choice)
+		{
+		case 1:
+			ds.themHocSinh();
+			break;
+		case 2:
+			ds.hienThiDanhSach();
+			system("pause");
+			break;
+		case 3:
+			ds.timHocSinh();
+			system("pause");
+			break;
+		case 4:
+			ds.suaHocSinh();
+			system("pause");
+			break;
+		case 5:
+			ds.xoaHocSinh();
+			system("pause");
+			break;
+		case 6:
+			ds.sapXepHocSinh_TB();
+			system("pause");
+			break;
+		case 7:
+			ds.doc_File();
+			system("pause");
+			break;
+		case 8:
+			ds.xuat_File();
+			system("pause");
+			break;
+		case 9:
+			cout << "cam on" << endl;
+			exit(0);
+			break;
+		default:
+			cout << "Lua chon khong hop le!" << endl;
+			break;
+		}
+		cout << endl;
+	} while (choice != 10);
+	return 0;
+}

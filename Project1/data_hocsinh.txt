@@ -1,0 +1,40 @@
+
+so luong hoc sinh gioi: 0
+so luong hoc sinh kha: 2
+so luong hoc sinh yeu: 1
+Ho Ten: guyen Ngoc Nguyen
+Gioi Tinh: nam
+Ngay sinh:12/06/2002
+Diem toan: 3
+Diem van: 4
+Diem anh van: 5
+Tu chon Khoa Hoc Xa Hoi
+Diem su: 1
+Diem dia ly: 2
+Diem giao duc kinh te: 3
+TB: 3
+Hoc luc yeu!
+Ho Ten: Duong Thu Thuy
+Gioi Tinh: nu
+Ngay sinh:30/06/2002
+Diem toan: 5
+Diem van: 6
+Diem anh van: 7
+Tu chon khoa hoc cong nghe - nghe thuat 
+Diem cong nghe: 7
+Diem tin hoc: 8
+Diem nghe thuat: 9
+TB: 7
+Hoc luc kha!
+Ho Ten: Nguyen Phuong Linh
+Gioi Tinh: nu
+Ngay sinh:01/09/2002
+Diem toan: 5
+Diem van: 6
+Diem anh van: 7
+Tu chon khoa hoc Tu Nhien
+Diem ly: 8
+Diem hoa: 9
+Diem sinh: 10
+TB: 7.5
+Hoc luc kha!
