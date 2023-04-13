@@ -1,15 +1,15 @@
- Nguyen van A
+ Nguyen van B
 nam
 12/06/2002
 3
 4
-5
+3
 2
 1
 2
 3
-Tran B
-nu
+Tran van B
+nam
 30/06/2002
 5
 6
@@ -18,7 +18,7 @@ nu
 7
 8
 9
-Duong thuy
+Duong thu
 nu
 01/09/2002
 5
@@ -28,7 +28,7 @@ nu
 8
 9
 10
-Thuy duong
+Thu duong
 nam
 03/02/2002
 9
@@ -38,7 +38,7 @@ nam
 8
 9
 10
-Van Duong
+Van Duongg
 nam
 01/01/2002
 5

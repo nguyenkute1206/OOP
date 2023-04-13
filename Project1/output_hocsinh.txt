@@ -2,11 +2,25 @@
 So Hoc sinh: 5
 
 so hoc sinh gioi: 1 (20.00%)
-so hoc sinh kha: 2 (40.00%)
-so hoc sinh yeu: 2 (40.00%)
+so hoc sinh kha: 1 (20.00%)
+so hoc sinh yeu: 3 (60.00%)
 
 Hoc sinh thu: 1
-Ho Ten: Van Duong
+Ho Ten: Nguyen van C
+Gioi Tinh: nam
+Ngay sinh: 12/06/2002
+Diem toan: 3.00
+Diem van: 4.00
+Diem anh van: 3.00
+Tu chon Khoa Hoc Xa Hoi
+Diem su: 1.00
+Diem dia ly: 2.00
+Diem giao duc kinh te: 3.00
+TB: 2.67
+Hoc luc yeu!
+
+Hoc sinh thu: 2
+Ho Ten: Van Duongg
 Gioi Tinh: nam
 Ngay sinh: 01/01/2002
 Diem toan: 5.00
@@ -19,10 +33,10 @@ Diem nghe thuat: 3.00
 TB: 3.33
 Hoc luc yeu!
 
-Hoc sinh thu: 2
-Ho Ten: nguyen ngoc nguyen
+Hoc sinh thu: 3
+Ho Ten: Nguyen ngoc nguyen
 Gioi Tinh: nam
-Ngay sinh: 12/05/2002
+Ngay sinh: 12/04/2002
 Diem toan: 4.00
 Diem van: 5.00
 Diem anh van: 6.00
@@ -33,22 +47,8 @@ Diem giao duc kinh te: 5.00
 TB: 4.50
 Hoc luc yeu!
 
-Hoc sinh thu: 3
-Ho Ten: Tran B
-Gioi Tinh: nu
-Ngay sinh: 30/06/2002
-Diem toan: 5.00
-Diem van: 6.00
-Diem anh van: 7.00
-Tu chon khoa hoc cong nghe - nghe thuat 
-Diem cong nghe: 7.00
-Diem tin hoc: 8.00
-Diem nghe thuat: 9.00
-TB: 7.00
-Hoc luc kha!
-
 Hoc sinh thu: 4
-Ho Ten: Duong thuy
+Ho Ten: Duong thu
 Gioi Tinh: nu
 Ngay sinh: 01/09/2002
 Diem toan: 5.00
@@ -62,7 +62,7 @@ TB: 7.50
 Hoc luc kha!
 
 Hoc sinh thu: 5
-Ho Ten: Thuy duong
+Ho Ten: Thu duong
 Gioi Tinh: nam
 Ngay sinh: 03/02/2002
 Diem toan: 9.00
